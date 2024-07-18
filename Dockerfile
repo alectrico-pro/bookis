@@ -38,4 +38,5 @@ RUN bundle install -j $(nproc)
 #Usar un override en render.com para hacer hanami db migrate
 
 EXPOSE 2300
-CMD ["bundle", "exec", "puma","-C", "config/puma.rb"]
+CMD ["bundle", "exec", "hanami", "db", "migrate" ]
+ENTRYPOINT ["bundle", "exec", "puma","-C", "config/puma.rb"]
