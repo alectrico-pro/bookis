@@ -27,5 +27,10 @@ COPY . /usr/local/app
 
 RUN bundle install -j $(nproc) 
 
+
+COPY .dockerdev/entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
 EXPOSE 2300
-ENTRYPOINT ["bundle", "exec", "hanami", "db", "migrate","&&","puma","-C", "config/puma.rb"]
+CMD ["bundle", "exec", "puma","-C", "config/puma.rb"]
