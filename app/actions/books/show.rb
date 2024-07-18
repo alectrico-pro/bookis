@@ -16,6 +16,7 @@ module Bookis
           response.format = :json
           response.body = book.to_h.to_json
         end
+
       end
     end
   end

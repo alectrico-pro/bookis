@@ -3,6 +3,7 @@
 module Bookis
   module Repos
     class BookRepo < Bookis::DB::Repo
+
       def create(attributes)
         books.changeset(:create, attributes).commit
       end
@@ -19,6 +20,7 @@ module Bookis
           .per_page(per_page)
           .to_a
       end
+
     end
   end
 end

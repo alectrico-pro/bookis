@@ -8,6 +8,7 @@ module Bookis
   class Action < Hanami::Action
     # Provide `Success` and `Failure` for pattern matching on operation results
     include Dry::Monads[:result]
+
     config.handle_exception ROM::TupleCountMismatchError => :handle_not_found
 
     private
@@ -17,5 +18,6 @@ module Bookis
       response.format = :json
       response.body = {error: "not_found"}.to_json
     end
+
   end
 end
