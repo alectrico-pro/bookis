@@ -3,7 +3,8 @@
 #
 # Environment and port
 #
-port ENV.fetch("HANAMI_PORT", 2300)
+#En heorku se debe usar PORT decidido por ellos
+port ENV.fetch("PORT", 2300)
 environment ENV.fetch("HANAMI_ENV", "development")
 
 #
