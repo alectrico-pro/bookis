@@ -14,7 +14,7 @@ gem "dry-types", "~> 1.0", ">= 1.6.1"
 gem "dry-operation", github: "dry-rb/dry-operation"
 gem "puma"
 gem "rake"
-gem "sqlite3"
+#gem "sqlite3"
 
 group :development do
   gem "hanami-webconsole", "~> 2.2.0.beta"
