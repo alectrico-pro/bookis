@@ -32,5 +32,10 @@ COPY .dockerdev/entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
+#error deployment en render.com
+#exec /usr/bin/entrypoint.sh: exec format error
+
+
+
 EXPOSE 2300
 CMD ["bundle", "exec", "puma","-C", "config/puma.rb"]
