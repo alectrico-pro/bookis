@@ -28,14 +28,14 @@ COPY . /usr/local/app
 RUN bundle install -j $(nproc) 
 
 
-COPY .dockerdev/entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+#COPY .dockerdev/entrypoint.sh /usr/bin/
+#RUN chmod +x /usr/bin/entrypoint.sh
+#ENTRYPOINT ["entrypoint.sh"]
 
 #error deployment en render.com
 #exec /usr/bin/entrypoint.sh: exec format error
 
-
+#Usar un override en render.com para hacer hanami db migrate
 
 EXPOSE 2300
 CMD ["bundle", "exec", "puma","-C", "config/puma.rb"]
