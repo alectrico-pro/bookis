@@ -1,0 +1,111 @@
+#https://www.useo.pl/blog/2023/03/setting-up-hanami-and-postgres-with-docker-compose
+#
+volumes:
+  postgres-data-db:
+  postgres-data-test:
+
+networks:
+  web:
+  test:
+
+services:
+  web: &web
+    build: .
+    command: hanami server
+    env_file: .env.development
+    volumes:
+      - ./:/usr/local/app
+    depends_on:
+      db:
+       condition: service_healthy
+    networks:
+      - web
+
+  #usar como docker compose up test
+  #Si se usa docker compose run test, da error con db_test
+  #Cuando se quiera ejecutar algo en el container usar
+  #docker compose up test en un vim 
+  #docker compose exec test bash en otro
+  #Luego usar hanami console
+
+  test: 
+    <<: *web
+    env_file: .env.test
+    volumes:
+      - ./:/usr/local/app
+    stdin_open: true
+    tty: true
+    depends_on:
+      db_test:
+        condition: service_healthy
+    networks:
+      - test
+    command:
+      - rspec
+        #      - hanami console
+
+  db:
+    image: postgres:10.4-alpine
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - postgres-data-db:/var/lib/postgresql/data
+    networks:
+      - web
+
+ #----------- test bed start ---------------------------
+ #en un vim
+ #docker compose up db_test
+ #en otro vim
+ #docker compose exec db_test psql
+ #Estando dentro del contenedor debe aparcer psql
+ #psql CREATE DATABASE docker compose exec db_test psql ;
+  db_test:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      PGUID: 1000
+      PUID: 1000
+      USER: tio
+      PGUSER: postgres
+    deploy:
+      replicas: 1
+    expose:
+      - "5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test
+
+
+
+  db_test_original:
+    image: postgres:10.4-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: example
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres-data-test:/var/lib/postgresql/data
+    networks:
+      - test
+
+      
+
+        
