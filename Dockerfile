@@ -28,4 +28,4 @@ COPY . /usr/local/app
 RUN bundle install -j $(nproc) 
 
 EXPOSE 2300
-ENTRYPOINT ["bundle", "exec"]
+ENTRYPOINT ["bundle", "exec", "puma","-C", "config/puma.rb"]
