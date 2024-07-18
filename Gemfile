@@ -39,3 +39,7 @@ group :test do
   gem "pg"
   gem "database_cleaner-sequel"
 end
+
+group :production do
+  gem "pg"
+end
