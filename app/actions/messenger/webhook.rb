@@ -7,7 +7,7 @@ module Bookis
           puts request.params.inspect
           puts request.params[:"hub.challenge"]
           response.status = 200
-          response.body = {:challenge => request.params[:"hub.challenge"]}.to_json
+          response.body = request.params[:"hub.challenge"]
         end
       end
     end
