@@ -8,5 +8,8 @@ module Bookis
     get  "/books",     to: "books.index"
     get  "/books/:id", to: "books.show"
     post "/books",     to: "books.create"
+
+    #procesa los envíos de la api de messenger (facebook)
+    get "/messenger_webhook", to: "messenger.webhook"
   end
 end
