@@ -2,10 +2,12 @@ module Bookis
   module Actions
     module Messenger
       class Webhook < Bookis::Action
+
         def handle(request, response)
-          Hanami.logger.info "en handle de Bookis_Action"
+          puts request.params.inspect
+          puts request.params[:"hub.challenge"]
           response.status = 200
-          response.body = {:info => "En handle de Messenger::Webhook" }.to_json
+          response.body = {:challenge => request.params[:"hub.challenge"]}.to_json
         end
       end
     end

@@ -1,0 +1,17 @@
+APP_URL=https://bookis.onrender.com/books
+curl -v -H "Content-Type: application/json" -i POST \
+"$APP_URL" \
+--data @/dev/stdin<<EOF
+{ "book": {"title": "Titulo", "author": "Autor"}}
+EOF
+
+curl -v -H "Content-Type: application/json" -i POST \
+"$APP_URL" \
+--data @/dev/stdin<<EOF
+{ "book": {"title": "Titulo2", "author": "Autor"}}
+EOF
+
+
+
+
+

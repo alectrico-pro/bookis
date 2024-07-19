@@ -1,0 +1,6 @@
+#Se conecta a la app en heroku para mostra el libro 1, 
+#Use antes books_create.curl
+APP_URL=https://bookis.onrender.com/messenger_webhook/?verification_token=1
+curl -v -H "Content-Type: application/json" -i GET \
+"$APP_URL"
+

@@ -1,0 +1,14 @@
+#Se conecta a la app en heroku para crear un libro
+APP_URL=https://whappy-0c678ebcdda3.herokuapp.com/books
+curl -v -H "Content-Type: application/json" -i POST \
+"$APP_URL" \
+--data @/dev/stdin<<EOF
+{ "book": {"title": "Titulo", "author": "Autor"}}
+EOF
+
+curl -v -H "Content-Type: application/json" -i POST \
+"$APP_URL" \
+--data @/dev/stdin<<EOF
+{ "book": {"title": "Titulo2", "author": "Autor"}}
+EOF
+
